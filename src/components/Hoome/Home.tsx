@@ -91,7 +91,7 @@ const Hello: React.FC<Props> = ({ city, ListRender, capital, modal }) => {
                                 <Text style={styles.modalText}>wind_speed {capitaldetail?.current?.wind_speed}</Text>
                                 <Text style={styles.modalText}>precipitation {capitaldetail?.current?.precip}</Text>
                                 <Pressable
-                                    style={[styles.button, styles.buttonClose]}
+                                    style={[styles.buttonStyle, styles.buttonClose]}
                                     onPress={() => setModalVisible(!modalVisible)}
                                 >
                                     <Text style={styles.textStyle}>Back</Text>
@@ -100,23 +100,23 @@ const Hello: React.FC<Props> = ({ city, ListRender, capital, modal }) => {
                         </View>
                         :
                         <View style={styles.list}>
-                            {citydetails && citydetails.map((item) => {
+                            {citydetails && citydetails.map((item : any,index :any) => {
                                 return (
-                                    <View style={styles.card}>
+                                    <View key={index} style={styles.card}>
                                         <View style={styles.subview}>
-                                            <Image source={{ uri: `${item.flags.png}` }} style={styles.image} />
+                                            <Image source={{ uri: `${item?.flags?.png}` }} style={styles.image} />
                                         </View>
                                         <View style={styles.subview}>
-                                            <Text >capital {item.capital} </Text>
-                                            <Text>population {item.population}</Text>
+                                            <Text >capital {item?.capital} </Text>
+                                            <Text>population {item?.population}</Text>
                                             <Text>flag  </Text>
-                                            <Text>Lat , Long {item.latlng[0]} {item.latlng[1]} </Text>
+                                            <Text>Lat , Long {item?.latlng[0]} {item?.latlng[1]} </Text>
                                             <View style={styles.button}>
                                                 <Button
                                                     title="Country Weather"
                                                     accessibilityLabel="decrement"
                                                     onPress={() => {
-                                                        weather(item.capital)
+                                                        weather(item?.capital[0])
                                                     }}
                                                     color="red"
                                                 />
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
         elevation: 5,
         flexDirection: 'row',
     },
-    button: {
+    buttonStyle: {
         borderRadius: 20,
         padding: 10,
         elevation: 2
